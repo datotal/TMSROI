@@ -17,13 +17,13 @@ st.set_page_config(
    
     initial_sidebar_state="auto",
 )
-data=pd.read_excel(r"C:\Users\pvijayakumar\Downloads\IP_OB.xlsx")
+data=pd.read_excel(r"IP_OB.xlsx")
 df=data
 print(df.columns)
 st.title("PROSPECT RECOMMENDATIONS")
-df_zip=pd.read_excel(r"C:\Users\pvijayakumar\OneDrive - Aptean-online\ZIp_lat_long_Pooja.xlsb", engine='pyxlsb')
+df_zip=pd.read_excel(r"ZIp_lat_long_Pooja.xlsx")
 
-df_datRates=pd.read_excel(r"C:\Users\pvijayakumar\Downloads\TL_Rates.xlsx")
+df_datRates=pd.read_excel(r"TL_Rates.xlsx")
 new_column_names = {
     'EstimatedLineTotal': 'Average Market Rate',
     'HighLineTotal': 'Ceiling Rate'
@@ -191,9 +191,7 @@ LTL_limit=106
 truckload_limit=200
 print("Data Cleaning sucessfully done")
   
-writer = pd.ExcelWriter(r"C:\Users\pvijayakumar\Downloads\Cleaned data.xlsx", engine='xlsxwriter',date_format='m/d/yyyy')
-df.to_excel(writer,sheet_name='Summary',index=False)
-writer.close()
+
 
 
 
@@ -953,9 +951,7 @@ preferred_loc.loc[(preferred_loc['Mode'] == 'PARCEL') & (preferred_loc['Estimate
 preferred_loc.loc[(preferred_loc['Mode'] == 'LTL') & (preferred_loc['Estimated $'] < LTL_limit), 'Estimated $'] = LTL_limit
 preferred_loc['Savings']=preferred_loc[charge]-(preferred_loc['Estimated $']) 
 print(preferred_loc)
-writer = pd.ExcelWriter(r"C:\Users\pvijayakumar\Downloads\preferred_loc.xlsx", engine='xlsxwriter',date_format='m/d/yyyy')
-preferred_loc.to_excel(writer,sheet_name='Summary',index=False)
-writer.close()
+
 weight_non_optimal_warehouse=preferred_loc[weight].sum()/40000
 print('Non optimal warehouse count',int(weight_non_optimal_warehouse))
 print('Cost',weight_non_optimal_warehouse*cost_of_single_tl)
