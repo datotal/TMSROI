@@ -745,15 +745,15 @@ st.subheader("------------------------------------------------------------------
 st.header("Additional Potential Savings")
 #additional savings 
 d=['Consolidation weekwise','Warehouse']
-c=[31530,10332]
+c=[10332]
 saving_percentage=int(((sum(c))/(total_charge))*100)
 total_saving=int(sum(c))
 st.subheader("Total Savings $"+str(f'{total_saving:,}')+" ("+str(saving_percentage)+"%)")
 
 
-cons_by_LTL = LTL_TL_cons(consolidation_by_mode_LTL.groupby([shipper_city,shipper_zip,shipper_state,consignee_state,consignee_zip,'Shipper_3digit_zip','Consignee_3digit_zip',
-                                                       'Consolidated_data', 'WeekNumber']).agg(aggregation_functions),'WeekNumber'," Weekwise")
-st.write("Note: If the weight exceeds 40,000 ,it should be treated as seperate shipment")
+# cons_by_LTL = LTL_TL_cons(consolidation_by_mode_LTL.groupby([shipper_city,shipper_zip,shipper_state,consignee_state,consignee_zip,'Shipper_3digit_zip','Consignee_3digit_zip',
+#                                                        'Consolidated_data', 'WeekNumber']).agg(aggregation_functions),'WeekNumber'," Weekwise")
+# st.write("Note: If the weight exceeds 40,000 ,it should be treated as seperate shipment")
 st.header("Warehouse Analysis Based On Distance")
 
 df=df[(df[shipper_country]=='US') & (df[consignee_country]=='US')]# taking US to US
