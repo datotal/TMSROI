@@ -125,7 +125,7 @@ st.subheader("Total Spend $"+str(f'{total_charge:,}'))
 
 #savings chart
 name= ['Mode Optimization', 'Consolidation', 'TL_DAT Rates']
-savings_total= [4631,17702 ,37825]
+savings_total= [4631,9107 ,37825]
 
 
 saving_percentage=int(((sum(savings_total))/(total_charge))*100)
@@ -444,7 +444,7 @@ LTL_to_TL=LTL_to_TL[LTL_to_TL['Estimated Freight$']!=0]
 
 if LTL_to_TL.shape[0]>1:
     #setting limit
-    LTL_to_TL.loc[(LTL_to_TL['Estimated Freight$'] <truckload_limit),'Estimated Freight$' ]=truckload_limit
+    # LTL_to_TL.loc[(LTL_to_TL['Estimated Freight$'] <truckload_limit),'Estimated Freight$' ]=truckload_limit
     LTL_to_TL['Savings']=LTL_to_TL[charge]-(LTL_to_TL['Estimated Freight$'])
     LTL_to_TL=LTL_to_TL[LTL_to_TL['Savings']>0]
     #changing datatype
@@ -629,9 +629,9 @@ def LTL_TL_cons(consbyLTL,a,var):
         if (shipment_consolidated_LTL_TL.shape[0]>1):
             shipment_consolidated_LTL_TL[weight] = shipment_consolidated_LTL_TL[weight].apply(lambda x: min(x, 40000))
             shipment_consolidated_LTL_TL['Estimated Freight$']=dat_Rates(shipment_consolidated_LTL_TL,shipper_zip,'Average Market Rate')
-            
+            shipment_consolidated_LTL_TL = shipment_consolidated_LTL_TL[shipment_consolidated_LTL_TL['Estimated Freight$'] !=0]
             #setting limit
-            shipment_consolidated_LTL_TL.loc[(shipment_consolidated_LTL_TL['Estimated Freight$'] <truckload_limit),'Estimated Freight$' ]=truckload_limit
+            # shipment_consolidated_LTL_TL.loc[(shipment_consolidated_LTL_TL['Estimated Freight$'] <truckload_limit),'Estimated Freight$' ]=truckload_limit
             shipment_consolidated_LTL_TL['Savings']=(shipment_consolidated_LTL_TL[charge]-(shipment_consolidated_LTL_TL['Estimated Freight$']))
             shipment_consolidated_LTL_TL=shipment_consolidated_LTL_TL[shipment_consolidated_LTL_TL['Savings']>0]
             #changing datatype
@@ -668,7 +668,7 @@ df_tl['Celing Rate']=dat_Rates(df_tl,shipper_zip,'Ceiling Rate')
 df_tl=df_tl[(df_tl['Average Market Rate']>0) & (df_tl['Celing Rate']>0)]
 print(df_tl)
 #setting limit
-df_tl.loc[(df_tl[charge] <truckload_limit),charge ]=truckload_limit
+# df_tl.loc[(df_tl[charge] <truckload_limit),charge ]=truckload_limit
 df_tl['Market savings']=df_tl[charge]-df_tl['Average Market Rate']
 df_tl['celing savings']=df_tl[charge]-df_tl['Celing Rate']
 
