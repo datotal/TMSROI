@@ -125,7 +125,7 @@ st.subheader("Total Spend $"+str(f'{total_charge:,}'))
 
 #savings chart
 name= ['Mode Optimization', 'Consolidation', 'TL_DAT Rates']
-savings_total= [4631,9107 ,37825]
+savings_total= [4008,6865 ,37825]
 
 
 saving_percentage=int(((sum(savings_total))/(total_charge))*100)
