@@ -439,7 +439,7 @@ print("Parcel to LTL completed")
 print("LTL to TL")
 ltl=df[df['Mode']=='LTL']
 LTL_to_TL=ltl[ltl[weight]>10000]
-LTL_to_TL['Estimated Freight$']=dat_Rates(LTL_to_TL,shipper_zip,'Average Market Rate')
+LTL_to_TL['Estimated Freight$']=dat_Rates(LTL_to_TL,shipper_zip,'Ceiling Rate')
 LTL_to_TL=LTL_to_TL[LTL_to_TL['Estimated Freight$']!=0]
 
 if LTL_to_TL.shape[0]>1:
@@ -465,7 +465,7 @@ if LTL_to_TL.shape[0]>1:
 else:
       ltl=df1[df1['Mode']=='LTL']
       LTL_to_TL=ltl[ltl[weight]>10000]
-      LTL_to_TL['Estimated Freight$']=dat_Rates(LTL_to_TL,shipper_zip,'Average Market Rate')
+      LTL_to_TL['Estimated Freight$']=dat_Rates(LTL_to_TL,shipper_zip,'Ceiling Rate')
       if LTL_to_TL.shape[0]>1:
             PARCELtoltl_charge=int(LTL_to_TL[charge].sum())
 
@@ -628,7 +628,7 @@ def LTL_TL_cons(consbyLTL,a,var):
         shipment_consolidated_LTL_TL=shipment_consolidated_LTL1[(shipment_consolidated_LTL1[weight]>10000)]
         if (shipment_consolidated_LTL_TL.shape[0]>1):
             shipment_consolidated_LTL_TL[weight] = shipment_consolidated_LTL_TL[weight].apply(lambda x: min(x, 40000))
-            shipment_consolidated_LTL_TL['Estimated Freight$']=dat_Rates(shipment_consolidated_LTL_TL,shipper_zip,'Average Market Rate')
+            shipment_consolidated_LTL_TL['Estimated Freight$']=dat_Rates(shipment_consolidated_LTL_TL,shipper_zip,'Ceiling Rate')
             shipment_consolidated_LTL_TL = shipment_consolidated_LTL_TL[shipment_consolidated_LTL_TL['Estimated Freight$'] !=0]
             #setting limit
             # shipment_consolidated_LTL_TL.loc[(shipment_consolidated_LTL_TL['Estimated Freight$'] <truckload_limit),'Estimated Freight$' ]=truckload_limit
